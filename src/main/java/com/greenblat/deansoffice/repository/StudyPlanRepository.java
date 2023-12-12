@@ -9,4 +9,8 @@ public interface StudyPlanRepository {
 
     List<StudyPlan> selectBySubject(Subject subject);
 
+    void addStudyPlan(StudyPlan studyPlan);
+
+    void updateStudyPlan(StudyPlan studyPlan);
+
 }

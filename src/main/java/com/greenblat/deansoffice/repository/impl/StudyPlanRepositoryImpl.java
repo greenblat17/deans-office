@@ -27,4 +27,37 @@ public class StudyPlanRepositoryImpl implements StudyPlanRepository {
                 """;
         return jdbcTemplate.query(sql, studyPlanRowMapper, subject.getName());
     }
+
+    @Override
+    public void addStudyPlan(StudyPlan studyPlan) {
+        var sql = """
+                INSERT INTO study_plan (subject_id, semester, hours, reporting_form)
+                VALUES (?, ?, ?, ?)
+                """;
+        jdbcTemplate.update(
+                sql,
+                studyPlan.getSubject().getId(),
+                studyPlan.getSemester(),
+                studyPlan.getHours(),
+                studyPlan.getReportingForm().name()
+        );
+    }
+
+    @Override
+    public void updateStudyPlan(StudyPlan studyPlan) {
+        var sql = """
+                UPDATE study_plan 
+                SET (subject_id, semester, hours, reporting_form) 
+                        = (?, ?, ?, ?)
+                WHERE id = ?
+                """;
+        jdbcTemplate.update(
+                sql,
+                studyPlan.getSubject().getId(),
+                studyPlan.getSemester(),
+                studyPlan.getHours(),
+                studyPlan.getReportingForm().name(),
+                studyPlan.getId()
+        );
+    }
 }
