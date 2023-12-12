@@ -1,5 +1,9 @@
 package com.greenblat.deansoffice.model;
 
 public enum ReportingForm {
-    EXAM, TEST
+    EXAM("exam"),
+    TEST("test");
+
+    ReportingForm(String name) {
+    }
 }
