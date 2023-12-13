@@ -1,5 +1,6 @@
 package com.greenblat.deansoffice.service;
 
+import com.greenblat.deansoffice.exception.ResourceNotFoundException;
 import com.greenblat.deansoffice.model.FormEducation;
 import com.greenblat.deansoffice.model.Student;
 import com.greenblat.deansoffice.repository.StudentRepository;
@@ -22,5 +23,11 @@ public class StudentService {
 
     public void updateStudent(Student student) {
         studentRepository.updateStudent(student);
+    }
+
+    public Student getStudent(Long id) {
+        return studentRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        String.format("Student with id [%s] not found", id)));
     }
 }
