@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -59,5 +60,18 @@ public class StudyPlanRepositoryImpl implements StudyPlanRepository {
                 studyPlan.getReportingForm().name(),
                 studyPlan.getId()
         );
+    }
+
+    @Override
+    public Optional<StudyPlan> findById(Long id) {
+        var sql = """
+                SELECT sp.id, sp.subject_id, sp.semester, sp.hours, sp.reporting_form, s.name, s.department
+                FROM study_plan sp
+                JOIN subject s ON s.id = sp.subject_id
+                WHERE s.id = ?
+                """;
+        return jdbcTemplate.query(sql, studyPlanRowMapper, id)
+                .stream()
+                .findFirst();
     }
 }
