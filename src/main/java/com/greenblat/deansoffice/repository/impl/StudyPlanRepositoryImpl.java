@@ -1,6 +1,6 @@
 package com.greenblat.deansoffice.repository.impl;
 
-import com.greenblat.deansoffice.mapper.StudyPlanRowMapper;
+import com.greenblat.deansoffice.repository.mapper.StudyPlanRowMapper;
 import com.greenblat.deansoffice.model.StudyPlan;
 import com.greenblat.deansoffice.model.Subject;
 import com.greenblat.deansoffice.repository.StudyPlanRepository;

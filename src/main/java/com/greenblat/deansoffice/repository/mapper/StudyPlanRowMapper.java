@@ -1,4 +1,4 @@
-package com.greenblat.deansoffice.mapper;
+package com.greenblat.deansoffice.repository.mapper;
 
 import com.greenblat.deansoffice.model.ReportingForm;
 import com.greenblat.deansoffice.model.StudyPlan;
