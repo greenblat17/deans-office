@@ -22,6 +22,18 @@ public class StudentService {
     }
 
     public void updateStudent(Student student) {
+        var updatedStudent = getStudent(student.getId());
+
+        if (!student.getGroupNumber().equals(updatedStudent.getGroupNumber())) {
+            updatedStudent.setGroupNumber(student.getGroupNumber());
+        }
+        if (!student.getFormEducation().equals(updatedStudent.getFormEducation())) {
+            updatedStudent.setFormEducation(student.getFormEducation());
+        }
+        if (!student.getUniversityYearAdmission().equals(updatedStudent.getUniversityYearAdmission())) {
+            updatedStudent.setUniversityYearAdmission(student.getUniversityYearAdmission());
+        }
+
         studentRepository.updateStudent(student);
     }
 
