@@ -5,6 +5,7 @@ import com.greenblat.deansoffice.model.Student;
 import com.greenblat.deansoffice.service.StudentService;
 import com.greenblat.deansoffice.validation.CheckFormEducation;
 import com.greenblat.deansoffice.validation.NotBlank;
+import com.greenblat.deansoffice.validation.Positive;
 import lombok.RequiredArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -25,9 +26,9 @@ public class StudentCommand {
     public String save(@ShellOption @NotBlank String lastName,
                        @ShellOption @NotBlank String firstName,
                        @ShellOption @NotBlank String surname,
-                       @ShellOption Integer yearAdmission,
+                       @ShellOption @Positive Integer yearAdmission,
                        @ShellOption @CheckFormEducation String education,
-                       @ShellOption Integer groupNumber) {
+                       @ShellOption @Positive Integer groupNumber) {
         var student = Student.builder()
                 .lastName(lastName)
                 .firstName(firstName)
@@ -41,7 +42,7 @@ public class StudentCommand {
     }
 
     @ShellMethod(key = "update-student", value = "update existing student")
-    public String update(@ShellOption Long id,
+    public String update(@ShellOption @Positive Long id,
                          @ShellOption(defaultValue = "") String lastName,
                          @ShellOption(defaultValue = "") String firstName,
                          @ShellOption(defaultValue = "") String surname,
@@ -49,6 +50,7 @@ public class StudentCommand {
                          @ShellOption @CheckFormEducation String education,
                          @ShellOption(defaultValue = "") Integer groupNumber) {
         var student = Student.builder()
+                .id(id)
                 .lastName(lastName)
                 .firstName(firstName)
                 .surname(surname)
