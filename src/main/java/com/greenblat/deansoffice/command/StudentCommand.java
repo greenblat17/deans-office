@@ -4,6 +4,7 @@ import com.greenblat.deansoffice.model.FormEducation;
 import com.greenblat.deansoffice.model.Student;
 import com.greenblat.deansoffice.service.StudentService;
 import com.greenblat.deansoffice.validation.CheckFormEducation;
+import com.greenblat.deansoffice.validation.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -21,9 +22,9 @@ public class StudentCommand {
     }
 
     @ShellMethod(key = "save-student", value = "save new student to database")
-    public String save(@ShellOption String lastName,
-                       @ShellOption String firstName,
-                       @ShellOption String surname,
+    public String save(@ShellOption @NotBlank String lastName,
+                       @ShellOption @NotBlank String firstName,
+                       @ShellOption @NotBlank String surname,
                        @ShellOption Integer yearAdmission,
                        @ShellOption @CheckFormEducation String education,
                        @ShellOption Integer groupNumber) {

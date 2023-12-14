@@ -3,6 +3,7 @@ package com.greenblat.deansoffice.command;
 import com.greenblat.deansoffice.dto.GradeBookRequest;
 import com.greenblat.deansoffice.model.GradeBook;
 import com.greenblat.deansoffice.service.GradeBookService;
+import com.greenblat.deansoffice.validation.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -16,7 +17,7 @@ public class GradeBookCommand {
 
     @ShellMethod(key = "save-grade-book", value = "save new grade book")
     public String save(@ShellOption Long studentId,
-                       @ShellOption String subjectName,
+                       @ShellOption @NotBlank String subjectName,
                        @ShellOption Short grade) {
         var gradeBookRequest = GradeBookRequest.builder()
                 .studentId(studentId)

@@ -3,6 +3,7 @@ package com.greenblat.deansoffice.command;
 import com.greenblat.deansoffice.dto.StudyPlanRequest;
 import com.greenblat.deansoffice.dto.StudyPlanResponse;
 import com.greenblat.deansoffice.service.StudyPlanService;
+import com.greenblat.deansoffice.validation.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -16,12 +17,12 @@ public class StudyPlanCommand {
 
     private final StudyPlanService studyPlanService;
 
-    public List<StudyPlanResponse> showStudyPlanWithSubject(@ShellOption String subjectName) {
+    public List<StudyPlanResponse> showStudyPlanWithSubject(@ShellOption @NotBlank String subjectName) {
         return studyPlanService.getStudyPlanBySubject(subjectName);
     }
 
     @ShellMethod(key = "save-plan", value = "save new study plan to database")
-    public String save(@ShellOption String subjectName,
+    public String save(@ShellOption @NotBlank String subjectName,
                        @ShellOption Integer semester,
                        @ShellOption Integer hours,
                        @ShellOption String reportingForm) {
@@ -37,10 +38,10 @@ public class StudyPlanCommand {
 
     @ShellMethod(key = "update-plan", value = "update existing study plan")
     public String update(@ShellOption Long id,
-                         @ShellOption String subjectName,
+                         @ShellOption @NotBlank String subjectName,
                          @ShellOption Integer semester,
                          @ShellOption Integer hours,
-                         @ShellOption String reportingForm) {
+                         @ShellOption @NotBlank String reportingForm) {
         var studyPlanRequest = StudyPlanRequest.builder()
                 .id(id)
                 .subjectName(subjectName)
