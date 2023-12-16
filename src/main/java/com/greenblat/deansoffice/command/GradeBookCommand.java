@@ -28,6 +28,7 @@ public class GradeBookCommand {
         return "Grade book saved";
     }
 
+    @ShellMethod(key = "updatee-grade-book", value = "update existing grade book")
     public String update(@ShellOption @Positive Long gradeBookId,
                          @ShellOption @Positive Long studentId,
                          @ShellOption(defaultValue = "") String subjectName,
