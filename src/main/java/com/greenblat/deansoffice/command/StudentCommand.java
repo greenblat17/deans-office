@@ -9,6 +9,7 @@ import com.greenblat.deansoffice.validation.Positive;
 import lombok.RequiredArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
+import org.springframework.shell.standard.ShellMethodAvailability;
 import org.springframework.shell.standard.ShellOption;
 
 @ShellComponent
@@ -18,11 +19,13 @@ public class StudentCommand {
     private final StudentService studentService;
 
     @ShellMethod(key = "count-student", value = "show count of student by form education")
+    @ShellMethodAvailability("isUserSignedIn")
     public Integer showCountStudent(@ShellOption @CheckFormEducation String education) {
         return studentService.countByFormEducation(FormEducation.valueOf(education));
     }
 
     @ShellMethod(key = "save-student", value = "save new student to database")
+    @ShellMethodAvailability("isUserAdmin")
     public String save(@ShellOption @NotBlank String lastName,
                        @ShellOption @NotBlank String firstName,
                        @ShellOption @NotBlank String surname,
@@ -42,6 +45,7 @@ public class StudentCommand {
     }
 
     @ShellMethod(key = "update-student", value = "update existing student")
+    @ShellMethodAvailability("isUserAdmin")
     public String update(@ShellOption @Positive Long id,
                          @ShellOption(defaultValue = "") String lastName,
                          @ShellOption(defaultValue = "") String firstName,
