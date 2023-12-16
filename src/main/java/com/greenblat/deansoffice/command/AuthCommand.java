@@ -1,7 +1,7 @@
 package com.greenblat.deansoffice.command;
 
+import com.greenblat.deansoffice.dto.AuthRequest;
 import com.greenblat.deansoffice.model.Role;
-import com.greenblat.deansoffice.model.User;
 import com.greenblat.deansoffice.service.AuthService;
 import com.greenblat.deansoffice.util.InputReader;
 import com.greenblat.deansoffice.util.ShellHelper;
@@ -35,7 +35,8 @@ public class AuthCommand extends SecureCommand{
         String password = inputReader.prompt("Please enter your password", null, false);
 
         try {
-            authService.authenticate(username, password);
+            var user = new AuthRequest(username, password, Role.USER);
+            authService.authenticate(user);
             shellHelper.printSuccess("Credentials successfully authenticated! " + username + " -> welcome to dean's office application.");
         } catch (AuthenticationException e) {
             shellHelper.printWarning("Authentication failed: " + e.getMessage());
@@ -47,11 +48,7 @@ public class AuthCommand extends SecureCommand{
         String username = readUsername();
         String password = inputReader.prompt("Please enter your password", null, false);
 
-        var user = User.builder()
-                .username(username)
-                .password(password)
-                .role(Role.USER)
-                .build();
+        var user = new AuthRequest(username, password, Role.USER);
         authService.registration(user);
 
         shellHelper.printSuccess("Registration was successfully!");
@@ -61,7 +58,6 @@ public class AuthCommand extends SecureCommand{
     @ShellMethodAvailability("isUserAdmin")
     public void becomeAdmin() {
         String username = readUsername();
-
         authService.addAdmin(username);
         shellHelper.printSuccess("User is admin now");
     }
