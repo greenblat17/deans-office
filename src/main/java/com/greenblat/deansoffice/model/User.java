@@ -24,4 +24,7 @@ public class User {
 
     private boolean superuser;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
 }
