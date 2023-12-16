@@ -18,6 +18,7 @@ public class StudyPlanCommand {
 
     private final StudyPlanService studyPlanService;
 
+    @ShellMethod(key = "subject-study-plan", value = "get stuwy plan with current subject")
     public List<StudyPlanResponse> showStudyPlanWithSubject(@ShellOption @NotBlank String subjectName) {
         return studyPlanService.getStudyPlanBySubject(subjectName);
     }
