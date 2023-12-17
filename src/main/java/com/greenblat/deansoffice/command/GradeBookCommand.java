@@ -42,6 +42,7 @@ public class GradeBookCommand {
         return "Grade book updated";
     }
 
+    @ShellMethod(key = "get-grade-book", value = "get grade book for student")
     public GradeBook showGradeBook(@ShellOption @Positive Long studentId) {
         return gradeBookService.getGradeBookForStudent(studentId);
     }
