@@ -8,6 +8,7 @@ CLI application providing interaction in dialogue mode for the dean's office.
 - Java 17
 - Spring Framework (Boot, Shell, Data JDBC, Data JPA)
 - PostgreSQL
+- Liquibase
 - Docker
 
 ## Features
