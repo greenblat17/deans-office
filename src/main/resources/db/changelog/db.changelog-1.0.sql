@@ -52,15 +52,3 @@ CREATE TABLE IF NOT EXISTS  "users"
     "role"     varchar NOT NULL
 );
 --rollback DROP TABLE users
-
---changeset greenblat17:6
-CREATE UNIQUE INDEX ON "subject" ("name", "department");
-
-ALTER TABLE "study_plan"
-    ADD FOREIGN KEY ("subject_id") REFERENCES "subject" ("id");
-
-ALTER TABLE "academic_performance"
-    ADD FOREIGN KEY ("student_id") REFERENCES "students" ("id");
-
-ALTER TABLE "academic_performance"
-    ADD FOREIGN KEY ("subject_id") REFERENCES "subject" ("id");
