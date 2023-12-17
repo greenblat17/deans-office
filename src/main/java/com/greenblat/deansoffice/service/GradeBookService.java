@@ -1,6 +1,7 @@
 package com.greenblat.deansoffice.service;
 
 import com.greenblat.deansoffice.dto.GradeBookRequest;
+import com.greenblat.deansoffice.exception.ResourceNotFoundException;
 import com.greenblat.deansoffice.model.GradeBook;
 import com.greenblat.deansoffice.repository.GradeBookRepository;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +40,11 @@ public class GradeBookService {
                 .grade(request.grade())
                 .build();
         gradeBookRepository.updateGrade(gradeBook);
+    }
+
+    public GradeBook getGradeBookForStudent(Long studentId) {
+        return gradeBookRepository.findByStudentId(studentId)
+                .orElseThrow(() -> new ResourceNotFoundException("Grade Book not found"));
     }
 
 }

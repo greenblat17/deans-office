@@ -1,6 +1,7 @@
 package com.greenblat.deansoffice.command;
 
 import com.greenblat.deansoffice.dto.GradeBookRequest;
+import com.greenblat.deansoffice.model.GradeBook;
 import com.greenblat.deansoffice.service.GradeBookService;
 import com.greenblat.deansoffice.validation.NotBlank;
 import com.greenblat.deansoffice.validation.Positive;
@@ -39,5 +40,9 @@ public class GradeBookCommand {
         var gradeBookRequest = new GradeBookRequest(gradeBookId, studentId, subjectName, grade);
         gradeBookService.updateGradeBook(gradeBookRequest);
         return "Grade book updated";
+    }
+
+    public GradeBook showGradeBook(@ShellOption @Positive Long studentId) {
+        return gradeBookService.getGradeBookForStudent(studentId);
     }
 }
